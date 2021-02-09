@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
-
+import os
 from aws_cdk import core
 
-from filebeat_kafka.filebeat_kafka_stack import FilebeatKafkaStack
-
+from vpc.vpc_stack import VpcStack
 
 app = core.App()
-FilebeatKafkaStack(app, "filebeat-kafka")
 
+# Vpc stack
+vpc_stack = VpcStack(
+    app,
+    "vpc",
+    env=core.Environment(
+        account=os.environ["CDK_DEFAULT_ACCOUNT"],
+        region=os.environ["CDK_DEFAULT_REGION"]
+    ),
+)
 app.synth()
