@@ -101,7 +101,7 @@ class KafkaStack(core.Stack):
         core.Tag.add(self.kafka_cluster, "project", constants["PROJECT_TAG"])
         
         if client == True:
-            kafka_client_userdata = user_data_init(log_group_name="filebeat-kafka/kafka/instance")
+            kafka_client_userdata = user_data_init(log_group_name="fb/kafka/instance")
             
             kafka_client_instance = ec2.Instance(
                 self,
@@ -123,7 +123,7 @@ class KafkaStack(core.Stack):
             access_kafka_policy = iam.PolicyStatement(
                 effect=iam.Effect.ALLOW,
                 actions=[
-                    "kafka:ListCluster",
+                    "kafka:ListClusters",
                     "kafka:GetBootstrapBrokers",
                     "kafka:DescribeCluster",
                 ],
@@ -152,7 +152,7 @@ class KafkaStack(core.Stack):
                 
                 f"kafka_zookeeper=`aws kafka describe-cluster --cluster-arn $kafka_arn --region {core.Aws.REGION} --output text --query 'ClusterInfo.ZookeeperConnectString'`",
                 
-                f"make_topic=`/opt/{constants['KAFKA_DOWNLOAD_VERSION']}/bin/kafka-topics.sh --create --zookeeper $kafka_zookeeper --replication-factor 3 --partitions 1 --topic topic 2>&1`",
+                f"make_topic=`/opt/{constants['KAFKA_DOWNLOAD_VERSION']}/bin/kafka-topics.sh --create --zookeeper $kafka_zookeeper --replication-factor 3 --partitions 1 --topic fbtopic 2>&1`",
                 f"make_topic=`/opt/{constants['KAFKA_DOWNLOAD_VERSION']}/bin/kafka-topics.sh --create --zookeeper $kafka_zookeeper --replication-factor 3 --partitions 1 --topic apachelog 2>&1`",
                 f"make_topic=`/opt/{constants['KAFKA_DOWNLOAD_VERSION']}/bin/kafka-topics.sh --create --zookeeper $kafka_zookeeper --replication-factor 3 --partitions 1 --topic appevent 2>&1`",
                 
