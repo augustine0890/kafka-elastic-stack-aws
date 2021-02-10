@@ -74,6 +74,7 @@ class KafkaStack(core.Stack):
         
         self.kafka_client_security_group.connections.allow_from(
             self.kafka_security_group,
+            ec2.Port.all_traffic(),
             "from kafka",
         )
         
@@ -158,7 +159,7 @@ class KafkaStack(core.Stack):
             )
             
             kafka_client_userdata.add_signal_on_exit_command(
-                resources=kafka_client_instance    
+                resource=kafka_client_instance    
             )
             
             kafka_client_instance.add_user_data(kafka_client_userdata.render())
