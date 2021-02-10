@@ -1,4 +1,4 @@
-from aws_ckd import (
+from aws_cdk import (
     core,
     aws_ec2 as ec2,
 )
@@ -11,7 +11,7 @@ class VpcStack(core.Stack):
         
         self.vpc = ec2.Vpc(self, "vpc", max_azs=2,)
         core.Tag.add(self.vpc, "project", constants["PROJECT_TAG"])
-
+        # Tags.of(self.vpc).add("project", constants["PROJECT_TAG"])
     @property
     def get_vpc(self):
         return self.vpc
