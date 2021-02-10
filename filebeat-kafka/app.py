@@ -11,7 +11,7 @@ app = core.App()
 # Vpc stack
 vpc_stack = VpcStack(
     app,
-    "vpc",
+    "fk-vpc",
     env=core.Environment(
         account=os.environ["CDK_DEFAULT_ACCOUNT"],
         region=os.environ["CDK_DEFAULT_REGION"],

@@ -56,7 +56,7 @@ class FilebeatStack(core.Stack):
             vpc=vpc_stack.get_vpc,
             vpc_subnets={"subnet_type": ec2.SubnetType.PUBLIC},
             key_name=constants["KEY_PAIR"],
-            security_group=kafka_stack.get_kafka_client_sercurity_group,
+            security_group=kafka_stack.get_kafka_client_security_group,
             user_data=fb_userdata,
         )
         core.Tag.add(fb_instance, "project", constants["PROJECT_TAG"])
