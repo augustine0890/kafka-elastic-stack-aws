@@ -145,7 +145,7 @@ class KafkaStack(core.Stack):
         
                 "yum install java-1.8.0 -y",
 
-                f'wget https://www-us.apache.org/dist/kafka/{constants["KAFKA_DOWNLOAD_VERSION"].split("-")[-1]}/{constants["KAFKA_DOWNLOAD_VERSION"]}.tgz',
+                f'curl https:/archive.apache.org/dist/kafka/{constants["KAFKA_DOWNLOAD_VERSION"].split("-")[-1]}/{constants["KAFKA_DOWNLOAD_VERSION"]}.tgz -o {constants["KAFKA_DOWNLOAD_VERSION"]}.tgz',
                 f"tar -xvf {constants['KAFKA_DOWNLOAD_VERSION']}.tgz",
                 f"mv {constants['KAFKA_DOWNLOAD_VERSION']} /opt",
                 f"rm {constants['KAFKA_DOWNLOAD_VERSION']}.tgz",
